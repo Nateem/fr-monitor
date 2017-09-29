@@ -1,0 +1,54 @@
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel" ng-if="globals.currentUser">
+            <div class="pull-left image">
+                <img ng-src="./img/profiles/Pic" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>FULLNAME</p>
+                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+        </div>
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+
+
+        <ul class="sidebar-menu" *ngFor="let m of menuRepeat; let i = index">
+            <li *ngIf="i==0" class="header">MAIN NAVIGATION</li>
+            <li *ngIf="!m.children && !m.data.menu_hide" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a [routerLink]="[m.path]">
+                    <i class="fa fa-home"></i> <span>{{m.data.title}}</span>
+                </a>
+            </li>
+            <li *ngIf="m.children && !m.data.menu_hide" class="treeview" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a [routerLink]="[m.path]">
+                    <i class="fa fa-home"></i> <span>{{m.data.title}}</span> <i class="fa fa-chevron-down"></i>
+                </a>
+                <ul class="treeview-menu" *ngFor="let mm of m.children">
+                    <li *ngIf="!mm.children" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <a [routerLink]="[m.path,mm.path]">{{mm.data.title}}</a>
+                    </li>
+                    <li *ngIf="mm.children" class="treeview " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <a><span>mm.TH_name</span> <i class="fa fa-chevron-down"></i></a>
+                        <ul class="treeview-menu">
+                            <li ng-repeat="mmm in mm.dropdown" ng-show="!mmm.menu_hide" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" ui-sref-active="current-page active">
+                                <a ui-sref="mmm.name" class="link">mmm.TH_name</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+
+        <!--       
+      <li class="header">LABELS</li>
+      <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+      <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
+      <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+      -->
+
+    </section>
+    <!-- /.sidebar -->
+</aside>
